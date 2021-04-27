@@ -1,0 +1,40 @@
+﻿@page "/"
+
+<h1>Hello, world!</h1>
+
+<EditForm Model="@starship" OnSubmit="onSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <InputText id="name" @bind-Value="starship.Identifier" />
+    <InputCheckbox @bind-Value="starship.BoolProperty" />
+
+    <button type="submit">Submit</button>
+</EditForm>
+
+<div>Starship is @starship.Identifier</div>
+<input type="text">
+
+<button>Random button</button>
+
+<div>@formSubmission</div>
+@code { 
+    private Starship starship;
+
+    private string formSubmission = "not submitted";
+
+    protected async override Task OnInitializedAsync()
+    {
+        starship = new Starship() {  Identifier = "uninitialized" };
+    }
+
+    private async Task onSubmit()
+    {
+        formSubmission = "onSubmit";
+    }
+
+    private async Task onValidSubmit()
+    {
+        formSubmission = "onValidSubmit";
+    }
+} 
